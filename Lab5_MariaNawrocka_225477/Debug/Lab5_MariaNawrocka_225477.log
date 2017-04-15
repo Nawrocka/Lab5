@@ -1,0 +1,2 @@
+﻿  Student.cpp
+c:\program files (x86)\microsoft visual studio\2017\enterprise\vc\tools\msvc\14.10.25017\include\string_view(11): fatal error C1189: #error:  string_view is only available with C++17.
