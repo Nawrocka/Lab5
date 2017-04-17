@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include <iostream>
+#include <string>
+
 using namespace std;
 
 class Student
@@ -11,9 +13,11 @@ protected:
 	int NoAlbum;
 	float AverageGrade;
 	string* Subjects;
+	int size;
 public:
 	Student();
 	Student(string name,string surname, int noAlbum, float averageGrade,int amountOfSubjects );
+	Student(const Student& right);
 	Student& operator=(Student& right);
 	void FillSubjects(string subject,int j) const;
 

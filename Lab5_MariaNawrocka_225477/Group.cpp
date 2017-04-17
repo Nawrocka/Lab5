@@ -8,11 +8,15 @@ Group::Group(int size)
 	students = new Student[size];
 }
 
-void Group:: Made(int whichone)
+void Group:: Made(int whichone) const 
 {
-	string name, surname;
-	int noAlbum, noOfCourses;
-	float averageGrade;
+	string name = "";
+	string surname = "";
+	string subject;
+	int noAlbum = 0;
+	int noOfCourses = 0;
+	float averageGrade=0;
+
 
 	cout << "Give me a name : ";
 	cin >> name;
@@ -28,7 +32,7 @@ void Group:: Made(int whichone)
 	Student student(name, surname, noAlbum, averageGrade, noOfCourses);
 
 	cout << "Write these courses: " << endl;
-	string subject;
+	
 	for (int j = 0; j < noOfCourses; j++)
 	{
 		cin >> subject;
@@ -38,8 +42,8 @@ void Group:: Made(int whichone)
 	this->students[whichone] = student;
 }
 
-void Add(Student* tab1, int size)
-{
+/*void Add(Student* tab1, int size)
+{*/
 	/*int n;
 	Student* tabB = new Student[size + 1];
 	for (int i = 0; i<size; i++)
@@ -59,8 +63,8 @@ void Add(Student* tab1, int size)
 		tabB[size + 1].FillSubjects(subject, j);
 	}
 	return tabB;*/
-
-}
+/*
+}*/
 
 Group::~Group()
 {

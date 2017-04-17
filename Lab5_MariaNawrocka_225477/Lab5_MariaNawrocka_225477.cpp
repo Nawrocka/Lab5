@@ -18,17 +18,17 @@ void DisplayMenu()
 
 void DisplayStudents()
 {
-	
+
 }
 
 void SaveDb()
 {
-	
+
 }
 
 void DeleteDb_Finish()
 {
-	
+
 }
 
 int main()
@@ -36,7 +36,7 @@ int main()
 	int k, number;
 	cout << "Give me a number of students";
 	cin >> k;
-	Group tab1(k);	
+	Group tab1(k);
 
 	for (int i = 0; i < k; i++)
 	{
@@ -51,19 +51,23 @@ int main()
 		{
 		case 1:
 		{
-			
+			break;;
 		}
 		case 2: DisplayStudents();
+			break;
 		case 3: SaveDb();
+			break;
 		case 4: DeleteDb_Finish();
+			break;
 		default:
 		{
 			cout << "You wrote incorrect number! Pick one more time.";
 			DisplayMenu();
+			break;
 		}
 		}
 	}
-	
+
 	return 0;
 }
 
