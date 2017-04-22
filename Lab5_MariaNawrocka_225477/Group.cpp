@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "Group.h"
 #include <string>
+#include <fstream>
 
 
 Group::Group(int size)
 {
-	students = new Student[size];
+	Size = size;
+	students = new Student[Size];
 }
 
 void Group:: Made(int whichone) const 
@@ -42,30 +44,73 @@ void Group:: Made(int whichone) const
 	this->students[whichone] = student;
 }
 
-/*void Add(Student* tab1, int size)
-{*/
-	/*int n;
-	Student* tabB = new Student[size + 1];
-	for (int i = 0; i<size; i++)
+Group Group:: Add() 
+{
+	Group tab2(this->Size + 1);
+	for(int i=0;i<this->Size;i++)
 	{
-		tabB[i] = tab1[i];
+		tab2.students[i] = this->students[i];		
 	}
 
-	cout << "How many courses have student no." << size + 2 << " ?" << endl;
-	cin >> n;
-	tabB[size + 1] = new Student(name, surname, NoAlbum, averageGrade, n);
+	tab2.Made(this->Size);
+	return tab2;
+}
 
-	cout << "Write these courses: " << endl;
-	string subject;
-	for (int j = 0; j < n; j++)
+void Group::DisplayStudents()
+{
+	cout << *this;
+}
+
+void Group::SaveDb()
+{
+	fstream plik;
+	plik.open("Zespolone.txt", ios::out);
+	if (plik.good() != true)
 	{
-		cin >> subject;
-		tabB[size + 1].FillSubjects(subject, j);
+		cout << "Nie ma takiego pliku/ coœ z istniej¹cym jest nie tak!" << endl;
+		system("pause");
+		exit(-1);
 	}
-	return tabB;*/
-/*
-}*/
+
+	plik << this;
+
+	plik.close();
+}
+
+void Group::DeleteDb_Finish()
+{
+	for(int i=0;i<this->Size;i++)
+	{
+		this->students[i].~Student();
+	}
+	this->~Group();
+}
+
+Group& Group::operator=(Group& right)
+{
+	if (this == &right)
+	{
+		return  *this;
+	}
+
+	if (students != nullptr)
+	{
+		delete[] students;
+		students = nullptr;
+	}
+
+	Size = right.Size;
+	students = new Student[Size];
+	for (int index = 0; index < Size; ++index)
+	{
+		students[index] = right.students[index];
+	}
+
+	return *this;
+}
+
 
 Group::~Group()
 {
+	delete[] students;
 }

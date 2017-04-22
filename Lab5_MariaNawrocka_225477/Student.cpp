@@ -12,7 +12,7 @@ Student::Student()
 	Subjects=nullptr;
 	NoAlbum = 0;
 	AverageGrade = 0;
-	size = 0;
+	Size = 0;
 }
 Student::Student(string name, string surname, int noAlbum, float averageGrade, int amountOfSubjects)
 {
@@ -20,23 +20,20 @@ Student::Student(string name, string surname, int noAlbum, float averageGrade, i
 	Surname = surname;
 	NoAlbum = noAlbum;
 	AverageGrade = averageGrade;
-	size = amountOfSubjects;
-	Subjects = new string[size];
+	Size = amountOfSubjects;
+	Subjects = new string[Size];
 }
 
 Student::Student(const Student& right)
 {
-	int size = right.size;
-	Subjects = new string[size];
-	for (int index = 0; index < size; ++index)
+	NoAlbum = right.NoAlbum;
+	AverageGrade = right.AverageGrade;
+	Size = right.Size;
+	Subjects = new string[Size];
+	for (int index = 0; index < Size; ++index)
 	{
 		Subjects[index] = right.Subjects[index];
 	}
-}
-
-Student::~Student()
-{
-	delete[] Subjects;
 }
 
 Student& Student::operator=( Student& right)
@@ -50,24 +47,28 @@ Student& Student::operator=( Student& right)
 	Surname = right.Surname;
 	NoAlbum = right.NoAlbum;
 	AverageGrade = right.AverageGrade;
-	size = right.size;
-
+	
 	if(Subjects!=nullptr)
 	{
 		delete[] Subjects;
 		Subjects = nullptr;
 	} 
-	int size = right.size;
-	Subjects = new string[size];
-	for (int index = 0; index < size; ++index)
+	Size = right.Size;
+	Subjects = new string[Size];
+	for (int index = 0; index < Size; ++index)
 	{
 		Subjects[index] = right.Subjects[index];
 	}
-
+	 
 	return *this;
 }
 
 void Student::FillSubjects(string subject,int j) const
 {
 	Subjects[j]= subject;
+}
+
+Student::~Student()
+{
+	delete[] Subjects;
 }
