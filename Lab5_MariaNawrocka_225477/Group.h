@@ -7,6 +7,7 @@ class Group
 	int Size;
 public:
 	Group(int size);
+	Group(const Group& right);
 	Group& operator=(Group& right);
 	friend ostream& operator << (ostream& c,Group& d);
 
@@ -15,6 +16,7 @@ public:
 	void SaveDb();
 	void DeleteDb_Finish();
 	void Made(int whichone) const;
+	float Sprawdzam() const;
 	
 	~Group();
 };

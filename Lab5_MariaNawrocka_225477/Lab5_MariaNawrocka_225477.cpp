@@ -20,7 +20,7 @@ ostream& operator << (ostream& c, Group& d)
 		c.unsetf(ios::basefield);
 
 		c.setf(std::ios_base::fixed);
-		c.precision(3);
+		c.precision(2);
 		c.setf(std::ios_base::showpoint);
 		c << d.students[i].AverageGrade << endl;
 		c.unsetf(ios::showpoint);
@@ -46,7 +46,7 @@ void DisplayMenu()
 int main()
 {
 	int k, number;
-	cout << "Give me a number of students";
+	cout << "Give me a number of students ";
 	cin >> k;
 	Group tab1(k);
 

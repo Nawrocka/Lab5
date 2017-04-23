@@ -3,11 +3,36 @@
 #include <string>
 #include <fstream>
 
+using namespace std;
 
 Group::Group(int size)
 {
 	Size = size;
 	students = new Student[Size];
+}
+
+Group::Group(const Group& right)
+{
+	Size = right.Size;
+	students = new Student[Size];
+	for (int index = 0; index < Size; ++index)
+	{
+		students[index] = right.students[index];
+	}
+}
+
+float Group::Sprawdzam() const
+{
+	float doPrzypisania;
+	
+	while (!(cin >> doPrzypisania))
+	{
+		cout << "That isn't a number! Write corectly : ";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+	
+	return doPrzypisania;
 }
 
 void Group:: Made(int whichone) const 
@@ -24,12 +49,22 @@ void Group:: Made(int whichone) const
 	cin >> name;
 	cout << endl << "Give me a surname : ";
 	cin >> surname;
-	cout << "Give me a number of album : ";
-	cin >> noAlbum;
+	cout << "Give me a number of album (6 digit): ";
+	noAlbum = int(Sprawdzam());
+
+	string Album = to_string(noAlbum);
+	while (Album.length()!=6)
+	{
+		cout << "Give 6 digit ! No more, no less : ";
+		Album = to_string(int(Sprawdzam()));
+	}
+	noAlbum = atoi(Album.c_str());
+
 	cout << "Give me a average Grade : ";
-	cin >> averageGrade;
+	averageGrade=Sprawdzam();
 	cout << "How many courses have student no." << whichone + 1 << " ?" << endl;
-	cin >> noOfCourses;
+	noOfCourses= int(Sprawdzam());
+	
 	
 	Student student(name, surname, noAlbum, averageGrade, noOfCourses);
 
@@ -72,18 +107,14 @@ void Group::SaveDb()
 		exit(-1);
 	}
 
-	plik << this;
+	plik << *this;
 
 	plik.close();
 }
 
 void Group::DeleteDb_Finish()
 {
-	for(int i=0;i<this->Size;i++)
-	{
-		this->students[i].~Student();
-	}
-	this->~Group();
+	exit(0);
 }
 
 Group& Group::operator=(Group& right)
